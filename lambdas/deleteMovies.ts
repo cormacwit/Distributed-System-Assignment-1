@@ -1,6 +1,6 @@
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
-import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
+import { DynamoDBDocumentClient, DeleteCommand } from "@aws-sdk/lib-dynamodb";
 import Ajv from "ajv";
 import schema from "../shared/types.schema.json";
 
@@ -14,40 +14,30 @@ export const handler: APIGatewayProxyHandlerV2 = async (event, context) => {
     // Print Event
     console.log("Event: ", event);
     const body = event.body ? JSON.parse(event.body) : undefined;
-    if (!body) {
+    const parameters  = event?.pathParameters;
+    const movieId = parameters?.movieId ? parseInt(parameters.movieId) : undefined;
+    if (!movieId) {
       return {
         statusCode: 500,
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ message: "Missing request body" }),
+        body: JSON.stringify({ message: "Missing request movie id" }),
       };
     }  
-    if (!isValidBodyParams(body)) {
-        return {
-          statusCode: 500,
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            message: `Incorrect type. Must match Movie schema`,
-            schema: schema.definitions["Movie"],
-          }),
-        };
-      }
 
     const commandOutput = await ddbDocClient.send(
-      new PutCommand({
-        TableName: process.env.TABLE_NAME,
-        Item: body,
-      })
+        new DeleteCommand({
+            TableName: process.env.TABLE_NAME,
+            Key: { movieId: movieId },
+          })
     );
     return {
-      statusCode: 201,
+      statusCode: 200,
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ message: "Movie added" }),
+      body: JSON.stringify({ message: "Movie deleted" }),
     };
   } catch (error: any) {
     console.log(JSON.stringify(error));
