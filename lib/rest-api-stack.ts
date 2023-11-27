@@ -130,7 +130,7 @@ export class RestAPIStack extends cdk.Stack {
     moviesTable.grantReadData(getAllMoviesFn)
     moviesTable.grantReadWriteData(newMovieFn)
     moviesTable.grantReadWriteData(deleteMovieFn)
-    movieCastsTable.grantReadData(getMovieCastMembersFn);
+    movieCastsTable.grantReadData(getMovieCastMembersFn);  // Added
 
     // REST API 
     const api = new apig.RestApi(this, "RestAPI", {
@@ -168,5 +168,12 @@ export class RestAPIStack extends cdk.Stack {
       "DELETE",
       new apig.LambdaIntegration(deleteMovieFn, { proxy: true })
     );
+
+    const movieCastEndpoint = moviesEndpoint.addResource("cast");
+movieCastEndpoint.addMethod(
+    "GET",
+    new apig.LambdaIntegration(getMovieCastMembersFn, { proxy: true })
+);
+
   }
 }
