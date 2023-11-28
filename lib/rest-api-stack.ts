@@ -170,20 +170,6 @@ export class RestAPIStack extends cdk.Stack {
     });
 
 
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////
-    const newMovieReviewFn = new lambdanode.NodejsFunction(this, "AddMovieReviewFn", {
-      architecture: lambda.Architecture.ARM_64,
-      runtime: lambda.Runtime.NODEJS_16_X,
-      entry: `${__dirname}/../lambdas/addReview.ts`,
-      timeout: cdk.Duration.seconds(10),
-      memorySize: 128,
-      environment: {
-        TABLE_NAME: movieReviewsTable.tableName,
-        REGION: "eu-west-1",
-      },
-    });
-
     const getReviewByReviewerNameFn = new lambdanode.NodejsFunction(
       this,
       "GetReviewByReviewerNameFn",
@@ -199,23 +185,6 @@ export class RestAPIStack extends cdk.Stack {
         },
       }
     );
-
-    const getReviewsByReviewerNameFn = new lambdanode.NodejsFunction(
-      this,
-      "GetReviewsByReviewerNameFn",
-      {
-        architecture: lambda.Architecture.ARM_64,
-        runtime: lambda.Runtime.NODEJS_16_X,
-        entry: `${__dirname}/../lambdas/getReviewsByReviewer.ts`,
-        timeout: cdk.Duration.seconds(10),
-        memorySize: 128,
-        environment: {
-          TABLE_NAME: movieReviewsTable.tableName,
-          REGION: 'eu-west-1',
-        },
-      }
-    );
-
 
     const getAllReviewsByReviewerFn = new lambdanode.NodejsFunction(
       this,
@@ -275,10 +244,9 @@ export class RestAPIStack extends cdk.Stack {
     movieReviewsTable.grantReadData(getMovieReviewsFn); // Added
     movieReviewsTable.grantReadWriteData(newReviewFn); // Added
     movieReviewsTable.grantReadData(getReviewByReviewerNameFn); // Added
-    movieReviewsTable.grantReadData(getReviewsByReviewerNameFn); // Added
     movieReviewsTable.grantReadData(getAllReviewsByReviewerFn); // Added
     movieReviewsTable.grantReadData(getReviewsByMovieFn); // Added
-    
+
 
 
     // REST API 

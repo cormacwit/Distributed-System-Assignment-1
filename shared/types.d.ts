@@ -49,3 +49,12 @@ export type MovieReview = {
   reviewRating: number;
   description: string;
 }
+
+export type MovieReviewQueryParams = {
+  movieId: number;
+  reviewerName: string;
+  reviewDate: string;
+  reviewRating: number;
+  description: string;
+
+}
