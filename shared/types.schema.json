@@ -1,109 +1,179 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
-      "Movie": {
-        "additionalProperties": false,
-        "properties": {
-          "genre_ids": {
-            "items": {
-              "type": "number"
+        "ConfirmSignUpBody": {
+            "additionalProperties": false,
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
             },
-            "type": "array"
-          },
-          "movieId": {
-            "type": "number"
-          },
-          "original_language": {
-            "type": "string"
-          },
-          "overview": {
-            "type": "string"
-          },
-          "popularity": {
-            "type": "number"
-          },
-          "release_date": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "video": {
-            "type": "boolean"
-          },
-          "vote_average": {
-            "type": "number"
-          },
-          "vote_count": {
-            "type": "number"
-          }
+            "required": [
+                "code",
+                "username"
+            ],
+            "type": "object"
         },
-        "required": [
-          "genre_ids",
-          "movieId",
-          "original_language",
-          "overview",
-          "popularity",
-          "release_date",
-          "title",
-          "video",
-          "vote_average",
-          "vote_count"
-        ],
-        "type": "object"
-      },
-      "ConfirmSignUpBody": {
-        "additionalProperties": false,
-        "properties": {
-          "code": {
-            "type": "string"
-          },
-          "username": {
-            "type": "string"
-          }
+        "Movie": {
+            "additionalProperties": false,
+            "properties": {
+                "genre_ids": {
+                    "items": {
+                        "type": "number"
+                    },
+                    "type": "array"
+                },
+                "movieId": {
+                    "type": "number"
+                },
+                "original_language": {
+                    "type": "string"
+                },
+                "overview": {
+                    "type": "string"
+                },
+                "popularity": {
+                    "type": "number"
+                },
+                "release_date": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "video": {
+                    "type": "boolean"
+                },
+                "vote_average": {
+                    "type": "number"
+                },
+                "vote_count": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "genre_ids",
+                "movieId",
+                "original_language",
+                "overview",
+                "popularity",
+                "release_date",
+                "title",
+                "video",
+                "vote_average",
+                "vote_count"
+            ],
+            "type": "object"
         },
-        "required": [
-          "code",
-          "username"
-        ],
-        "type": "object"
-      },
-      "SignInBody": {
-        "additionalProperties": false,
-        "properties": {
-          "password": {
-            "type": "string"
-          },
-          "username": {
-            "type": "string"
-          }
+        "MovieCast": {
+            "additionalProperties": false,
+            "properties": {
+                "actorName": {
+                    "type": "string"
+                },
+                "movieId": {
+                    "type": "number"
+                },
+                "roleDescription": {
+                    "type": "string"
+                },
+                "roleName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "actorName",
+                "movieId",
+                "roleDescription",
+                "roleName"
+            ],
+            "type": "object"
         },
-        "required": [
-          "password",
-          "username"
-        ],
-        "type": "object"
-      },
-      "SignUpBody": {
-        "additionalProperties": false,
-        "properties": {
-          "email": {
-            "type": "string"
-          },
-          "password": {
-            "type": "string"
-          },
-          "username": {
-            "type": "string"
-          }
+        "MovieCastMemberQueryParams": {
+            "additionalProperties": false,
+            "properties": {
+                "actorName": {
+                    "type": "string"
+                },
+                "movieId": {
+                    "type": "string"
+                },
+                "roleName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "movieId"
+            ],
+            "type": "object"
         },
-        "required": [
-          "email",
-          "password",
-          "username"
-        ],
-        "type": "object"
-      }
+        "MovieReview": {
+            "additionalProperties": false,
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "movieId": {
+                    "type": "number"
+                },
+                "reviewDate": {
+                    "type": "string"
+                },
+                "reviewRating": {
+                    "type": "number"
+                },
+                "reviewerName": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description",
+                "movieId",
+                "reviewDate",
+                "reviewRating",
+                "reviewerName"
+            ],
+            "type": "object"
+        },
+        "SignInBody": {
+            "additionalProperties": false,
+            "properties": {
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "password",
+                "username"
+            ],
+            "type": "object"
+        },
+        "SignUpBody": {
+            "additionalProperties": false,
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "email",
+                "password",
+                "username"
+            ],
+            "type": "object"
+        }
     }
-  }
-  
+}
+

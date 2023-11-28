@@ -41,3 +41,11 @@ export type SignInBody = {
   username: string;
   password: string;
 }
+
+export type MovieReview = {
+  movieId: number;
+  reviewerName: string;
+  reviewDate: string;
+  reviewRating: number;
+  description: string;
+}
